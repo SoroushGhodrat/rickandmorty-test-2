@@ -16,13 +16,15 @@ export default function Home() {
       <Head>
         <title>Rick and Morty Test</title>
       </Head>
-      <main>
-        <h1>Rick and Morty Test</h1>
+      <main className="ml-64 p-4 md:p-8 lg:p-12">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">Rick and Morty Test</h1>
         {data && (
-          <ul>
+          <ul className="mt-4 space-y-2">
             {Object.keys(data).map((key) => (
-              <li key={key}>
-                <Link href={`/${key}`}>{key}</Link>
+              <li key={key} className="text-lg md:text-xl lg:text-2xl">
+                <Link href={`/${key}`} className="text-blue-500 hover:text-blue-700">
+                  {key}
+                </Link>
               </li>
             ))}
           </ul>
