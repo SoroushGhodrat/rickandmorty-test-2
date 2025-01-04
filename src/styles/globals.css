@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  transition: all 0.5s;
 }
 
 html,
@@ -22,6 +23,6 @@ h1 {
 }
 
 a {
-  color: blue;
+  /* color: blue; */
   text-decoration: underline;
 }
