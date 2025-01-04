@@ -1,18 +1,40 @@
-import React, { useState, useMemo, useCallback } from "react";
-import Link from "next/link";
-import useAxios from "@/hooks/useAxios";
-import dateNormalizer from "@/utils/helpers/dateNormalizer";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Pagination from "@/components/common/Pagination";
-import { BsArrowsFullscreen } from "react-icons/bs";
-
+import React, { useState, useMemo, useCallback } from 'react';
+import Link from 'next/link';
+import useAxios from '@/hooks/useAxios';
+import dateNormalizer from '@/utils/helpers/dateNormalizer';
+import Loading from '@/components/ui/Loading';
+import Error from '@/components/ui/Error';
+import Pagination from '@/components/common/Pagination';
+import { BsArrowsFullscreen } from 'react-icons/bs';
+import ResidentsList from '@/components/Residents/ResidentsList';
+import { useResidents } from '@/context/ResidentsContext';
 interface Location {
   id: number;
   name: string;
   type: string;
   dimension: string;
   residents: string[];
+  url: string;
+  created: string;
+}
+
+interface Resident {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
   url: string;
   created: string;
 }
@@ -31,13 +53,14 @@ interface ApiLocationResponse {
 
 const Locations = () => {
   const [page, setPage] = useState(1);
+  const { residentsDetailes, setResidentsDetailes } = useResidents();
 
   const axiosRequestConfig = useMemo(
     () => ({
       url: `https://rickandmortyapi.com/api/location?page=${page}`,
-      method: "GET",
+      method: 'GET',
     }),
-    [page]
+    [page],
   );
 
   const { data, isLoading, isError, isSuccessful } =
@@ -47,48 +70,69 @@ const Locations = () => {
     setPage(newPage);
   }, []);
 
-  const handleResidebtsList = useCallback((residents: string[]) => {
-    console.log(residents);
-  }, []);
+  // Update ResidentsList state in context 
+  const handleResidentsListContext = useCallback(
+    (residentsList: string[]) => {
+      setResidentsDetailes({
+        show: !residentsDetailes.show,
+        list: residentsList,
+      });
+    },
+    [residentsDetailes, setResidentsDetailes],
+  );
 
   if (isLoading) return <Loading />;
   if (isError) return <Error />;
 
   return (
-    <main className="p-4 md:p-8 lg:p-12 ">
-      <header className="text-center text- py-10">
-        <h1 className="text-2xl capitalize md:text-4xl lg:text-6xl font-bold">locations</h1>
+    <main className="p-4">
+      <header className="text- py-10 text-center">
+        <h1 className="text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
+          locations
+        </h1>
         <p>{`There are a total of ${data?.info.count} locations in the Rick and Morty franchise.`}</p>
       </header>
 
       {isSuccessful && data && (
         <section>
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {data.results.map((location) => (
-              <li
-                key={location.id}
-                className="border p-4 rounded-md capitalize hover:border-blue-500 hover:shadow-md"
-              >
-                <div className="text-xl font-bold text-center p-10">
-                  <h2>{`Location ${location.id}`}</h2>
-                  <h2 className="text-xl font-bold">{location.name}</h2>
-                </div>
-                <p>Type: {location.type}</p>
-                <p>Dimension: {location.dimension}</p>
-                <div className="flex items-baseline">
-                  <p className="mr-2">Number of residents: {location.residents.length}</p>
-                  <BsArrowsFullscreen
-                    fontSize={13}
-                    className="hover:text-blue-700 cursor-pointer"
-                    aria-label="Expand"
-                    role="button"
-                    onClick={() => handleResidebtsList(location.residents)}
-                  />
-                </div>
-                <p>Created: {dateNormalizer(location.created)}</p>
-              </li>
+              <>
+                <li
+                  key={location.id}
+                  className="rounded-md border p-4 capitalize hover:border-blue-500 hover:shadow-md"
+                >
+                  <div className="p-10 text-center text-xl font-bold">
+                    <h2>{`Location ${location.id}`}</h2>
+                    <h2 className="text-xl font-bold">{location.name}</h2>
+                  </div>
+                  <p>Type: {location.type}</p>
+                  <p>Dimension: {location.dimension}</p>
+                  <div className="flex items-baseline">
+                    <p className="mr-2">
+                      Number of residents: {location.residents.length}
+                    </p>
+                    {location.residents.length > 0 && (
+                      <BsArrowsFullscreen
+                        fontSize={13}
+                        className="cursor-pointer hover:text-blue-700"
+                        aria-label="Expand"
+                        role="button"
+                        onClick={() =>
+                          handleResidentsListContext(location.residents)
+                        }
+                      />
+                    )}
+                  </div>
+                  <p>Created: {dateNormalizer(location.created)}</p>
+                </li>
+              </>
             ))}
           </ul>
+
+          {residentsDetailes.show && (
+            <ResidentsList residentsList={residentsDetailes} />
+          )}
 
           <Pagination
             currentPage={page}
