@@ -4,36 +4,9 @@ import Image from 'next/image';
 import Button from '../ui/Button';
 import { useResidents } from '@/context/ResidentsContext';
 import { BsArrowsExpand, BsArrowsCollapse } from 'react-icons/bs';
+import { Resident } from '@/types/types';
 
-interface Resident {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-}
-
-interface ResidentsListProps {
-  residentsList: {
-    show: boolean;
-    list: string[];
-  };
-}
-
-const ResidentsList: React.FC<ResidentsListProps> = () => {
+const ResidentsList: React.FC = () => {
   // Call residentsDetailes and setResidentsDetailes from ResidentsContext
   const { residentsDetailes, setResidentsDetailes } = useResidents();
 
