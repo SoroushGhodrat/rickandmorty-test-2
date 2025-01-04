@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useState, useEffect } from 'react';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface UseMultipleAxiosResult<T> {
   data: T[];
@@ -19,7 +19,7 @@ const useMultipleAxios = <T,>(urls: string[]): UseMultipleAxiosResult<T> => {
 
       try {
         const responses: AxiosResponse<T>[] = await Promise.all(
-          urls.map((url) => axios.get<T>(url))
+          urls.map((url) => axios.get<T>(url)),
         );
         const responseData = responses.map((response) => response.data);
         setData(responseData);

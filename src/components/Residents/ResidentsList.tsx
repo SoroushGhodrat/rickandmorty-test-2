@@ -62,12 +62,12 @@ const ResidentsList: React.FC<ResidentsListProps> = () => {
     }));
   };
 
-    const handleToggleDetails = (id: number) => {
-      setExpandedResidents((prevState) => ({
-        ...prevState,
-        [id]: !prevState[id],
-      }));
-    };
+  const handleToggleDetails = (id: number) => {
+    setExpandedResidents((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 p-5">
@@ -112,7 +112,10 @@ const ResidentsList: React.FC<ResidentsListProps> = () => {
                     <p>Status: {resident.status}</p>
                     <p>Name: {resident.name}</p>
                     <p>Species: {resident.species}</p>
-                    <p>Type: {resident.type.length === 0 ? 'No data!' : resident.type}</p>
+                    <p>
+                      Type:{' '}
+                      {resident.type.length === 0 ? 'No data!' : resident.type}
+                    </p>
                     <p>Gender: {resident.gender}</p>
                     <p>Appears in {resident.episode.length} episode(s)</p>
                   </div>

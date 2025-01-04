@@ -70,7 +70,7 @@ const Locations = () => {
     setPage(newPage);
   }, []);
 
-  // Update ResidentsList state in context 
+  // Update ResidentsList state in context
   const handleResidentsListContext = useCallback(
     (residentsList: string[]) => {
       setResidentsDetailes({

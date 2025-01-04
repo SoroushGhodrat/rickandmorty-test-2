@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useEffect, useState } from 'react';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Generic type parameter to allow defining a type that can be specified later
 interface UseAxiosResult<T> {
@@ -9,7 +9,9 @@ interface UseAxiosResult<T> {
   isSuccessful: boolean;
 }
 
-const useAxios = <T,>(axiosRequestConfig: AxiosRequestConfig): UseAxiosResult<T> => {
+const useAxios = <T,>(
+  axiosRequestConfig: AxiosRequestConfig,
+): UseAxiosResult<T> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -23,7 +25,7 @@ const useAxios = <T,>(axiosRequestConfig: AxiosRequestConfig): UseAxiosResult<T>
 
       try {
         const response: AxiosResponse<T> = await axios(axiosRequestConfig);
-        console.log("Response Data: ", response.data);
+        console.log('Response Data: ', response.data);
         setData(response.data);
         setIsSuccessful(true);
       } catch (error) {
