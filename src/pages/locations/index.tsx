@@ -5,6 +5,7 @@ import Error from '@/components/ui/Error';
 import Pagination from '@/components/common/Pagination';
 import { ApiLocationResponse } from '@/types/types';
 import LocationLists from '@/components/Locations/LocationLists';
+import Head from 'next/head';
 
 const Locations: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -25,32 +26,43 @@ const Locations: React.FC = () => {
   }, []);
 
   return (
-    <main className="p-4">
-      <header className="text- py-10 text-center">
-        <h1 className="pb-3 text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
-          locations
-        </h1>
-        <p>{`There are a total of ${data?.info.count} locations in the Rick and Morty franchise.`}</p>
-      </header>
+    <>
+      <Head>
+        <title>Locations - Rick and Morty</title>
+        <meta
+          name="description"
+          content="Explore the various locations in the Rick and Morty universe."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
-      {isLoading && <Loading />}
+      <main className="p-4">
+        <header className="text- py-10 text-center">
+          <h1 className="pb-3 text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
+            locations
+          </h1>
+          <p>{`There are a total of ${data?.info.count} locations in the Rick and Morty franchise.`}</p>
+        </header>
 
-      {isError && <Error />}
+        {isLoading && <Loading />}
 
-      {isSuccessful && data && (
-        <>
-          <LocationLists data={data} />
+        {isError && <Error />}
 
-          <Pagination
-            currentPage={page}
-            totalPage={data.info.pages || 1}
-            hasNextPage={!!data.info.next}
-            hasPrevPage={!!data.info.prev}
-            onPageChange={handlePageChange}
-          />
-        </>
-      )}
-    </main>
+        {isSuccessful && data && (
+          <>
+            <LocationLists data={data} />
+
+            <Pagination
+              currentPage={page}
+              totalPage={data.info.pages || 1}
+              hasNextPage={!!data.info.next}
+              hasPrevPage={!!data.info.prev}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
+      </main>
+    </>
   );
 };
 

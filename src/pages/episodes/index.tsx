@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import EpisodesList from '@/components/Episodes/EpisodesList';
+import Head from 'next/head';
 
 const Episodes = () => {
   const config = useMemo(
@@ -18,24 +19,32 @@ const Episodes = () => {
     results: any[];
   }>(config);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error occurred</div>;
-
   return (
-    <main className="p-4">
-      <header className="text- py-10 text-center">
-        <h1 className="pb-3 text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
-          Episodes
-        </h1>
-        <p>{`There are a total of ${'???'} episodes in the Rick and Morty franchise.`}</p>
-      </header>
+    <>
+      <Head>
+        <title>Episodes - Rick and Morty</title>
+        <meta
+          name="description"
+          content="Explore the various episodes in the Rick and Morty universe."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
-      {isLoading && <Loading />}
+      <main className="p-4">
+        <header className="text- py-10 text-center">
+          <h1 className="pb-3 text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
+            Episodes
+          </h1>
+          <p>{`There are a total of ${'???'} episodes in the Rick and Morty franchise.`}</p>
+        </header>
 
-      {isError && <Error />}
+        {isLoading && <Loading />}
 
-      {isSuccessful && data && <EpisodesList data={data} />}
-    </main>
+        {isError && <Error />}
+
+        {isSuccessful && data && <EpisodesList data={data} />}
+      </main>
+    </>
   );
 };
 
