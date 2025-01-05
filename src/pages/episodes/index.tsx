@@ -22,10 +22,14 @@ const Episodes = () => {
     <main className="p-4 md:p-8 lg:p-12">
       {isSuccessful && (
         <>
-          <Link href="/" className="text-blue-500 hover:text-blue-700">
-            Home
+          <Link
+            className="capitalize text-blue-500 hover:text-blue-700"
+            href="/"
+            passHref
+          >
+            back to home
           </Link>
-          <h1 className="text-2xl font-bold md:text-4xl lg:text-6xl">
+          <h1 className="my-5 text-2xl font-bold md:text-4xl lg:text-6xl">
             Episodes
           </h1>
           <pre>{JSON.stringify(data, null, 2)}</pre>

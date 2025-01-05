@@ -28,27 +28,34 @@ const Pagination: React.FC<PaginationProps> = ({
   }, [currentPage, hasPrevPage, onPageChange]);
 
   return (
-    <div className="mt-4 flex justify-between">
-      <button
-        onClick={handlePrevPage}
-        disabled={!hasPrevPage}
-        className="rounded bg-blue-500 px-4 py-2 text-white disabled:opacity-50"
-      >
-        Previous
-      </button>
-      <span className="px-4 py-2">
-        {totalPage && totalPage > 1
-          ? `Page ${currentPage} of ${totalPage}`
-          : `Page ${currentPage}`}
-      </span>
-      <button
-        onClick={handleNextPage}
-        disabled={!hasNextPage}
-        className="rounded bg-blue-500 px-4 py-2 text-white disabled:opacity-50"
-      >
-        Next
-      </button>
-    </div>
+    <nav
+      className="mt-10 flex justify-center rounded-md border border-indigo-400 p-3"
+      aria-label="Pagination"
+    >
+      <div className="flex space-x-6">
+        <button
+          onClick={handlePrevPage}
+          disabled={!hasPrevPage}
+          className="rounded bg-blue-500 px-4 py-2 text-white disabled:opacity-50"
+          aria-disabled={!hasPrevPage}
+        >
+          Previous
+        </button>
+        <span className="px-4 py-2">
+          {totalPage && totalPage > 1
+            ? `Page ${currentPage} of ${totalPage}`
+            : `Page ${currentPage}`}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={!hasNextPage}
+          className="rounded bg-blue-500 px-4 py-2 text-white disabled:opacity-50"
+          aria-disabled={!hasNextPage}
+        >
+          Next
+        </button>
+      </div>
+    </nav>
   );
 };
 

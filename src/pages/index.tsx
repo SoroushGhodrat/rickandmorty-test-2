@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
         <h2 className="text-xl font-bold">API Endpoints</h2>
         <p>The following endpoints are used in this project:</p>
         <ul>
-          {apiEndpoints.map((endpoint) => (
+          {apiEndpoints.map((endpoint: ApiEndpoint) => (
             <li key={endpoint.href} className="rounded-md hover:bg-blue-500">
               <Link
                 href={endpoint.href}

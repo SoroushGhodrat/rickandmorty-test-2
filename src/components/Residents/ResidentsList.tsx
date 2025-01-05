@@ -5,6 +5,8 @@ import Button from '../ui/Button';
 import { useResidents } from '@/context/ResidentsContext';
 import { BsArrowsExpand, BsArrowsCollapse } from 'react-icons/bs';
 import { Character } from '@/types/types';
+import Loading from '@/components/ui/Loading';
+import Error from '@/components/ui/Error';
 
 const ResidentsList: React.FC = () => {
   // Call residentsDetailes and setResidentsDetailes from ResidentsContext
@@ -24,8 +26,8 @@ const ResidentsList: React.FC = () => {
   } = useMultipleAxios<Character>(list);
 
   if (!show) return null;
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading residents list</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   // update show state of ResidentsList in context
   const handleClose = () => {
@@ -55,7 +57,7 @@ const ResidentsList: React.FC = () => {
               <div className="flex items-center">
                 <Image
                   src={resident.image}
-                  alt={resident.name}
+                  alt={`Image of ${resident.name}`}
                   width={50}
                   height={50}
                   quality={100}
@@ -69,6 +71,8 @@ const ResidentsList: React.FC = () => {
                 <button
                   onClick={() => handleToggleDetails(resident.id)}
                   className="flex items-center text-blue-500 hover:text-blue-700"
+                  aria-expanded={expandedResidents[resident.id]}
+                  aria-controls={`resident-details-${resident.id}`}
                 >
                   {expandedResidents[resident.id] ? (
                     <>
@@ -81,7 +85,10 @@ const ResidentsList: React.FC = () => {
                   )}
                 </button>
                 {expandedResidents[resident.id] && (
-                  <div className="mt-2 transition-all duration-500 ease-in-out">
+                  <div
+                    id={`resident-details-${resident.id}`}
+                    className="mt-2 transition-all duration-500 ease-in-out"
+                  >
                     <p>Status: {resident.status}</p>
                     <p>Name: {resident.name}</p>
                     <p>Species: {resident.species}</p>
