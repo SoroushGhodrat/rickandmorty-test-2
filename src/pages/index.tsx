@@ -43,11 +43,11 @@ const HomePage: React.FC = () => {
         <p>The following endpoints are used in this project:</p>
         <ul>
           {apiEndpoints.map((endpoint) => (
-            <li key={endpoint.href}>
+            <li key={endpoint.href} className="rounded-md hover:bg-blue-500">
               <Link
                 href={endpoint.href}
                 passHref
-                className="flex items-center py-2 no-underline hover:text-blue-700"
+                className="my-3 flex items-center rounded-md border p-2 py-2 no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
