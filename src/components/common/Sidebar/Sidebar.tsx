@@ -1,28 +1,35 @@
 import React from 'react';
 import Link from 'next/link';
+import { BiHomeAlt2 } from 'react-icons/bi';
 
 const Sidebar = () => {
   return (
-    <nav className="fixed left-0 top-0 h-full w-64 bg-gray-800 p-4">
+    <nav
+      className="fixed left-0 top-0 h-full w-64 bg-gray-800 p-4"
+      aria-label="Sidebar"
+    >
       <div className="flex flex-col space-y-4">
-        <div className="mb-4 text-lg font-bold text-white md:text-xl lg:text-2xl">
-          <Link href="/">Rick and Morty</Link>
-        </div>
+        <header className="mb-4 flex items-center text-lg font-bold text-blue-500 hover:text-blue-700 md:text-xl lg:text-2xl">
+          <BiHomeAlt2 className="mr-2" />
+          <Link href="/" className="no-underline">
+            Rick and Morty
+          </Link>
+        </header>
         <Link
           href="/characters"
-          className="text-sm text-gray-300 hover:text-white md:text-base lg:text-lg"
+          className="text-sm text-gray-300 hover:text-blue-700 md:text-base lg:text-lg"
         >
           Characters
         </Link>
         <Link
           href="/episodes"
-          className="text-sm text-gray-300 hover:text-white md:text-base lg:text-lg"
+          className="text-sm text-gray-300 hover:text-blue-700 md:text-base lg:text-lg"
         >
           Episodes
         </Link>
         <Link
           href="/locations"
-          className="text-sm text-gray-300 hover:text-white md:text-base lg:text-lg"
+          className="text-sm text-gray-300 hover:text-blue-700 md:text-base lg:text-lg"
         >
           Locations
         </Link>
