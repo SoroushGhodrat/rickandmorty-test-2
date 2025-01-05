@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '../ui/Button';
 import { useResidents } from '@/context/ResidentsContext';
 import { BsArrowsExpand, BsArrowsCollapse } from 'react-icons/bs';
-import { Resident } from '@/types/types';
+import { Character } from '@/types/types';
 
 const ResidentsList: React.FC = () => {
   // Call residentsDetailes and setResidentsDetailes from ResidentsContext
@@ -21,7 +21,7 @@ const ResidentsList: React.FC = () => {
     data: residents,
     isLoading,
     isError,
-  } = useMultipleAxios<Resident>(list);
+  } = useMultipleAxios<Character>(list);
 
   if (!show) return null;
   if (isLoading) return <div>Loading...</div>;
