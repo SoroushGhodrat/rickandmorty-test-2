@@ -24,17 +24,18 @@ const Locations: React.FC = () => {
     setPage(newPage);
   }, []);
 
-  if (isLoading) return <Loading />;
-  if (isError) return <Error />;
-
   return (
     <main className="p-4">
       <header className="text- py-10 text-center">
-        <h1 className="text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
+        <h1 className="pb-3 text-2xl font-bold capitalize md:text-4xl lg:text-6xl">
           locations
         </h1>
         <p>{`There are a total of ${data?.info.count} locations in the Rick and Morty franchise.`}</p>
       </header>
+
+      {isLoading && <Loading />}
+
+      {isError && <Error />}
 
       {isSuccessful && data && (
         <>
