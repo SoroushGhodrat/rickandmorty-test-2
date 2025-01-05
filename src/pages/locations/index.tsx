@@ -61,7 +61,7 @@ const Locations = () => {
                   key={location.id}
                   className="transform rounded-md border p-4 capitalize transition-all duration-300 hover:scale-105 hover:border-blue-500 hover:shadow-xl"
                 >
-                  <div className="p-10 text-center text-xl font-bold">
+                  <div className="py-8 text-center text-xl font-bold">
                     <h2>{`Location ${location.id}`}</h2>
                     <h2 className="text-xl font-bold">{location.name}</h2>
                   </div>
