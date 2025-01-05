@@ -6,13 +6,3 @@
   box-sizing: border-box;
   transition: all 0.5s;
 }
-
-html,
-body {
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-}
-
-main {
-  padding: 1rem;
-}
