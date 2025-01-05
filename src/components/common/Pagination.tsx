@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <nav
-      className="mt-10 flex justify-center rounded-md border border-indigo-400 p-3"
+      className="mt-5 flex justify-center rounded-md border border-blue-500 p-3"
       aria-label="Pagination"
     >
       <div className="flex space-x-6">
