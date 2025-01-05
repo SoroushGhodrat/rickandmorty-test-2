@@ -5,7 +5,7 @@ import dateNormalizer from '@/utils/helpers/dateNormalizer';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import Pagination from '@/components/common/Pagination';
-import { BsArrowsFullscreen } from 'react-icons/bs';
+import { FcTodoList } from 'react-icons/fc';
 import ResidentsList from '@/components/Residents/ResidentsList';
 import { useResidents } from '@/context/ResidentsContext';
 import { ApiLocationResponse } from '@/types/types';
@@ -67,20 +67,26 @@ const Locations = () => {
                   </div>
                   <p>Type: {location.type}</p>
                   <p>Dimension: {location.dimension}</p>
-                  <div className="flex items-baseline">
+                  <div className="align-center flex hover:text-blue-800">
                     <p className="mr-2">
                       Number of residents: {location.residents.length}
                     </p>
                     {location.residents.length > 0 && (
-                      <BsArrowsFullscreen
-                        fontSize={13}
-                        className="cursor-pointer hover:text-blue-700"
-                        aria-label="Expand"
-                        role="button"
-                        onClick={() =>
-                          handleResidentsListContext(location.residents)
-                        }
-                      />
+                      <div className="group relative">
+                        <FcTodoList
+                          fontSize={20}
+                          color="blue"
+                          className="bold cursor-pointer hover:text-blue-700"
+                          aria-label="Expand"
+                          role="button"
+                          onClick={() =>
+                            handleResidentsListContext(location.residents)
+                          }
+                        />
+                        <div className="absolute bottom-full left-1/2 mb-2 hidden w-max -translate-x-1/2 transform rounded bg-lime-600 p-2 text-xs text-white group-hover:block">
+                          View Residents
+                        </div>
+                      </div>
                     )}
                   </div>
                   <p>Created: {dateNormalizer(location.created)}</p>
