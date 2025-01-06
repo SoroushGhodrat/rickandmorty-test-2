@@ -7,7 +7,7 @@ interface Page {
   name: string;
 }
 
-const pages: Page[] = [
+export const pages: Page[] = [
   { href: '/characters', name: 'Characters' },
   { href: '/episodes', name: 'Episodes' },
   { href: '/locations', name: 'Locations' },
@@ -21,6 +21,7 @@ const Sidebar: React.FC = () => {
     <nav
       className="fixed left-0 top-0 h-full w-64 bg-gray-800 p-4"
       aria-label="Sidebar"
+      data-testid="sidebar"
     >
       <div className="flex flex-col space-y-4">
         <header className="mb-4 flex items-center text-lg font-bold text-blue-500 hover:text-blue-700 md:text-xl lg:text-2xl">
