@@ -6,6 +6,13 @@ import Pagination from '@/components/common/Pagination';
 import { ApiLocationResponse } from '@/types/types';
 import LocationLists from '@/components/Locations/LocationLists';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import SkeletonTextLoading from '@/components/ui/SkeletonTextLoading';
+
+const DynamicError = dynamic(() => import('@/components/ui/Error'));
+const DynamicSkeletonTextLoading = dynamic(
+  () => import('@/components/ui/SkeletonTextLoading'),
+);
 
 const Locations: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -44,9 +51,9 @@ const Locations: React.FC = () => {
           <p>{`There are a total of ${data?.info.count} locations in the Rick and Morty franchise.`}</p>
         </header>
 
-        {isLoading && <Loading />}
+        {isLoading && <DynamicSkeletonTextLoading />}
 
-        {isError && <Error />}
+        {isError && <DynamicError />}
 
         {isSuccessful && data && (
           <>

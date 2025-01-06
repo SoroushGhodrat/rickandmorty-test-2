@@ -5,10 +5,13 @@ import { FcTodoList } from 'react-icons/fc';
 import dateNormalizer from '@/utils/helpers/dateNormalizer';
 import ResidentsList from './ResidentsList';
 import { ApiLocationResponse } from '@/types/types';
+import dynamic from 'next/dynamic';
 
 interface LocationListsProps {
   data: ApiLocationResponse;
 }
+// Dynamically import the ResidentsList component to optimize performance
+const DynamicResidentsList = dynamic(() => import('./ResidentsList'));
 
 const LocationLists: React.FC<LocationListsProps> = ({ data }) => {
   const { residentsDetailes, setResidentsDetailes } = useResidents();
@@ -31,6 +34,7 @@ const LocationLists: React.FC<LocationListsProps> = ({ data }) => {
           locations list
         </h2>
       </header>
+
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {data.results.map((location: Location) => (
           <li
@@ -64,7 +68,7 @@ const LocationLists: React.FC<LocationListsProps> = ({ data }) => {
         ))}
       </ul>
 
-      {residentsDetailes.show && <ResidentsList />}
+      {residentsDetailes.show && <DynamicResidentsList />}
     </section>
   );
 };
