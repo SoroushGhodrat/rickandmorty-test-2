@@ -67,6 +67,7 @@ const ResidentsList: React.FC = () => {
                   <p className="font-bold">{resident.name}</p>
                 </div>
               </div>
+
               <section className="ml-14">
                 <button
                   onClick={() => handleToggleDetails(resident.id)}
