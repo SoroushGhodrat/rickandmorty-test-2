@@ -27,8 +27,6 @@ describe('Sidebar test(s):', () => {
   it('renders the Sidebar links', async () => {
     render(<Sidebar />);
 
-    
-
     expect(await screen.findByText(/Characters/i)).toBeInTheDocument();
     expect(await screen.findByText(/Episodes/i)).toBeInTheDocument();
     expect(await screen.findByText(/Locations/i)).toBeInTheDocument();

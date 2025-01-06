@@ -1,16 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
 import { BiHomeAlt2 } from 'react-icons/bi';
+import { BsPinMap, BsListCheck, BsPersonBoundingBox } from 'react-icons/bs';
+
 import { usePathname } from 'next/navigation';
 interface Page {
   href: string;
   name: string;
+  icon: JSX.Element;
 }
 
 export const pages: Page[] = [
-  { href: '/characters', name: 'Characters' },
-  { href: '/episodes', name: 'Episodes' },
-  { href: '/locations', name: 'Locations' },
+  {
+    href: '/characters',
+    name: 'Characters',
+    icon: <BsPersonBoundingBox className="mr-2" />,
+  },
+  {
+    href: '/episodes',
+    name: 'Episodes',
+    icon: <BsListCheck className="mr-2" />,
+  },
+  {
+    href: '/locations',
+    name: 'Locations',
+    icon: <BsPinMap className="mr-2" />,
+  },
 ];
 
 const Sidebar: React.FC = () => {
@@ -38,11 +53,11 @@ const Sidebar: React.FC = () => {
             // Conditionally apply styles to highlight the current page
             className={` ${
               pathname === page.href
-                ? 'text-2xl text-blue-500'
-                : 'text-sm text-gray-300 hover:text-blue-700 md:text-base lg:text-lg'
+                ? 'flex items-center text-2xl text-blue-500'
+                : 'flex items-center text-sm text-gray-300 hover:text-blue-700 md:text-base lg:text-lg'
             } `}
           >
-            {page.name}
+            {page.icon} {page.name}
           </Link>
         ))}
       </div>
