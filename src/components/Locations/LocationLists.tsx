@@ -21,7 +21,7 @@ const LocationLists: React.FC<LocationListsProps> = ({ data }) => {
     (residentsList: string[]) => {
       setResidentsDetailes({
         show: !residentsDetailes.show,
-        list: residentsList,
+        residentsList: residentsList,
       });
     },
     [residentsDetailes, setResidentsDetailes],
@@ -50,7 +50,7 @@ const LocationLists: React.FC<LocationListsProps> = ({ data }) => {
             <p className="my-1">
               Number of residents: {location.residents.length}
             </p>
-            {location.residents.length > 0 && (
+            {data.results.length > 0 && (
               <div className="my-1 flex">
                 <button
                   onClick={() => handleResidentsListContext(location.residents)}

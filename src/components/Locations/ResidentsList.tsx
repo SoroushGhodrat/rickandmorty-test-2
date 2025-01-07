@@ -13,7 +13,7 @@ const ResidentsList: React.FC = () => {
   const { residentsDetailes, setResidentsDetailes } = useResidents();
 
   // Desctructure show and list from residentsDetailes
-  const { show, list } = residentsDetailes;
+  const { show, residentsList } = residentsDetailes;
 
   const [expandedResidents, setExpandedResidents] = useState<{
     [key: number]: boolean;
@@ -23,7 +23,7 @@ const ResidentsList: React.FC = () => {
     data: residents,
     isLoading,
     isError,
-  } = useMultipleAxios<Character>(list);
+  } = useMultipleAxios<Character>(residentsList);
 
   if (!show) return null;
   if (isLoading) return <Loading />;

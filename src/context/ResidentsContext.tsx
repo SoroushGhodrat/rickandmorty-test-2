@@ -8,7 +8,7 @@ import React, {
 
 interface residentsDetailes {
   show: boolean;
-  list: string[];
+  residentsList: string[];
 }
 interface ResidentsContextProps {
   residentsDetailes: residentsDetailes;
@@ -25,7 +25,7 @@ export const ResidentsProvider: React.FC<{ children: ReactNode }> = ({
   const [residentsDetailes, setResidentsDetailes] = useState<residentsDetailes>(
     {
       show: false,
-      list: [],
+      residentsList: [],
     },
   );
   // Debugging the context value in the console to see the changes

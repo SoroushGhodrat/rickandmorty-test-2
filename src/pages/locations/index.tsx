@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import useAxios from '@/hooks/useAxios';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import Pagination from '@/components/common/Pagination';
@@ -8,6 +7,7 @@ import LocationLists from '@/components/Locations/LocationLists';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import SkeletonTextLoading from '@/components/ui/SkeletonTextLoading';
+import useFetch from '@/hooks/useFetch';
 
 const DynamicError = dynamic(() => import('@/components/ui/Error'));
 const DynamicSkeletonTextLoading = dynamic(
@@ -19,14 +19,14 @@ const Locations: React.FC = () => {
 
   const axiosRequestConfig = useMemo(
     () => ({
-      url: `https://rickandmortyapi.com/api/location?page=${page}`,
+      url: `/api/v1/locations/all-locations?page=${page}`,
       method: 'GET',
     }),
     [page],
   );
 
   const { data, isLoading, isError, isSuccessful } =
-    useAxios<ApiLocationResponse>(axiosRequestConfig);
+    useFetch<ApiLocationResponse>(axiosRequestConfig);
 
   const handlePageChange = useCallback((newPage: number) => {
     setPage(newPage);
