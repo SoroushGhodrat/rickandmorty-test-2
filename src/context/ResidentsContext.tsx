@@ -28,8 +28,9 @@ export const ResidentsProvider: React.FC<{ children: ReactNode }> = ({
       residentsList: [],
     },
   );
+  
   // Debugging the context value in the console to see the changes
-  console.log('Updated residentsDetailes context:', residentsDetailes);
+  // console.log('Updated residentsDetailes context:', residentsDetailes);
 
   return (
     <ResidentsContext.Provider
