@@ -1,20 +1,20 @@
 import React, { useMemo } from 'react';
-import useAxios from '@/hooks/useAxios';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import CharactersList from '@/components/Characters/CharactersList';
 import Head from 'next/head';
+import useFetch from '@/hooks/useFetch';
 
 const Characters: React.FC = () => {
   const config = useMemo(
     () => ({
-      url: 'https://rickandmortyapi.com/api/character',
+      url: '/api/v1/characters/all-characters',
       method: 'GET',
     }),
     [],
   );
 
-  const { data, isLoading, isError, isSuccessful } = useAxios<{
+  const { data, isLoading, isError, isSuccessful } = useFetch<{
     results: any[];
   }>(config);
 
