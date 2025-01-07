@@ -1,21 +1,21 @@
-import useAxios from '@/hooks/useAxios';
-import Link from 'next/link';
 import React, { useMemo } from 'react';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
 import EpisodesList from '@/components/Episodes/EpisodesList';
 import Head from 'next/head';
+import useFetch from '@/hooks/useFetch';
 
 const Episodes = () => {
   const config = useMemo(
     () => ({
-      url: 'https://rickandmortyapi.com/api/episode',
+      // url: `api/v1/episodes/all-episodes?page=${page}`,
+      url: `api/v1/episodes/all-episodes`,
       method: 'GET',
     }),
     [],
   );
 
-  const { data, isLoading, isError, isSuccessful } = useAxios<{
+  const { data, isLoading, isError, isSuccessful } = useFetch<{
     results: any[];
   }>(config);
 
